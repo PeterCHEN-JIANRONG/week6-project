@@ -1,5 +1,17 @@
 # week6-project
 
+電商網站前後台整合，導入 Vue Cli、NPM、元件化
+
+# 頁面
+
+- [前台頁](https://peterchen-jianrong.github.io/week6-project/#/products)
+- [後台頁](https://peterchen-jianrong.github.io/week6-project/#/admin)
+
+### 說明
+
+- 前台不需登入，後台需要登入。
+- 請將.env 檔，VUE_APP_PATH 替換成自己申請的。
+
 ## Project setup
 
 ```
