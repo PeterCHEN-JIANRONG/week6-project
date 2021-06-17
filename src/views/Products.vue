@@ -49,10 +49,10 @@
   </div>
 
   <!-- modal -->
-  <product-modal ref="productModalA" :product="product" @add-to-cart="addCart"></product-modal>
+  <ProductModal ref="productModalA" :product="product" @add-to-cart="addCart"></ProductModal>
 </template>
 <script>
-import productModal from '@/components/productModal.vue';
+import ProductModal from '@/components/productModal.vue';
 
 export default {
   data() {
@@ -81,7 +81,7 @@ export default {
     };
   },
   components: {
-    productModal,
+    ProductModal,
   },
   methods: {
     getProducts(page = 1) {
