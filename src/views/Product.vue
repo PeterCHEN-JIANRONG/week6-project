@@ -1,7 +1,6 @@
 <template>
   <div class="container">
-    <h1>產品頁</h1>
-    <!-- {{ product }} -->
+    <h1>{{ product.title }}</h1>
     <div class="row">
       <div class="col-sm-6">
         <img class="img-fluid mb-4" :src="product.imageUrl" alt="" />

@@ -48,6 +48,9 @@
     </div>
   </div>
 
+  <!-- vue-loading -->
+  <VueLoading v-bind:active="isLoading"></VueLoading>
+
   <!-- modal -->
   <ProductModal ref="productModalA" :product="product" @add-to-cart="addCart"></ProductModal>
 </template>
@@ -59,18 +62,6 @@ export default {
     return {
       products: [],
       product: {},
-      loadingStatus: {
-        loadingItem: '',
-      },
-      form: {
-        user: {
-          name: '',
-          email: '',
-          tel: '',
-          address: '',
-        },
-        message: '',
-      },
       isLoading: false,
     };
   },
@@ -79,6 +70,7 @@ export default {
   },
   methods: {
     getProducts(page = 1) {
+      this.isLoading = true;
       const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/products?page=${page}`;
       this.$http
         .get(url)
@@ -88,6 +80,7 @@ export default {
           } else {
             this.errorAlert(res.data.message);
           }
+          this.isLoading = false;
         })
         .catch((err) => {
           console.dir(err);
@@ -113,7 +106,7 @@ export default {
         });
     },
     addCart(id, qty = 1) {
-      // this.loadingStatus.loadingItem = id;
+      this.isLoading = true;
       const data = {
         product_id: id,
         qty,
@@ -123,10 +116,8 @@ export default {
         .post(url, { data })
         .then((res) => {
           if (res.data.success) {
-            // this.getCart();
-            // this.loadingStatus.loadingItem = '';
-            // this.$refs.productModalA.qty = 1; // 初始化加入購物車數量:1
             // this.$refs.productModalA.hideModal();
+            this.isLoading = false;
             this.successAlert(res.data.message);
           } else {
             this.errorAlert(res.data.message);

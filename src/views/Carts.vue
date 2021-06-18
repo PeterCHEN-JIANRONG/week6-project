@@ -78,6 +78,9 @@
       </tfoot>
     </table>
   </div>
+
+  <!-- vue-loading -->
+  <VueLoading v-bind:active="isLoading"></VueLoading>
 </template>
 <script>
 export default {
@@ -88,14 +91,25 @@ export default {
         final_total: 0,
         carts: [],
       },
+      form: {
+        user: {
+          name: '',
+          email: '',
+          tel: '',
+          address: '',
+        },
+        message: '',
+      },
       hasCartsItems: false,
       loadingStatus: {
         loadingItem: '',
       },
+      isLoading: false,
     };
   },
   methods: {
     getCart() {
+      this.isLoading = true;
       const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/cart`;
       this.$http
         .get(url)
@@ -103,14 +117,16 @@ export default {
           if (res.data.success) {
             this.cart = res.data.data;
           } else {
-            this.successAlert(res.data.message);
+            this.errorAlert(res.data.message);
           }
+          this.isLoading = false;
         })
         .catch((error) => {
           console.dir(error);
         });
     },
     updateCart(item) {
+      this.isLoading = true;
       this.loadingStatus.loadingItem = item.id;
       const data = {
         product_id: item.product_id,
@@ -124,6 +140,7 @@ export default {
             this.getCart();
             this.loadingStatus.loadingItem = '';
           }
+          this.isLoading = false;
           this.successAlert(res.data.message);
         })
         .catch((error) => {
@@ -131,6 +148,7 @@ export default {
         });
     },
     removeCartItem(id) {
+      this.isLoading = true;
       const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/cart/${id}`;
       this.$http
         .delete(url)
@@ -138,6 +156,7 @@ export default {
           if (res.data.success) {
             this.getCart();
           }
+          this.isLoading = false;
           this.successAlert(res.data.message);
         })
         .catch((error) => {
@@ -145,6 +164,7 @@ export default {
         });
     },
     deleteAllCarts() {
+      this.isLoading = true;
       const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/carts`;
       this.$http
         .delete(url)
@@ -153,6 +173,7 @@ export default {
             this.getCart();
           }
           this.successAlert(res.data.message);
+          this.isLoading = false;
         })
         .catch((error) => {
           console.dir(error);
