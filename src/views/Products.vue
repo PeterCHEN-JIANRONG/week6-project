@@ -233,6 +233,54 @@ export default {
           console.dir(error);
         });
     },
+    updateCart(item) {
+      this.loadingStatus.loadingItem = item.id;
+      const data = {
+        product_id: item.product_id,
+        qty: item.qty,
+      };
+      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
+      this.$http
+        .put(url, { data })
+        .then((res) => {
+          if (res.data.success) {
+            this.getCart();
+            this.loadingStatus.loadingItem = '';
+          }
+          this.successAlert(res.data.message);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
+    removeCartItem(id) {
+      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/cart/${id}`;
+      this.$http
+        .delete(url)
+        .then((res) => {
+          if (res.data.success) {
+            this.getCart();
+          }
+          this.successAlert(res.data.message);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
+    deleteAllCarts() {
+      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/carts`;
+      this.$http
+        .delete(url)
+        .then((res) => {
+          if (res.data.success) {
+            this.getCart();
+          }
+          this.successAlert(res.data.message);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
     toThousand(num) {
       // 千分位
       const temp = num.toString().split('.');
@@ -254,6 +302,12 @@ export default {
         title: 'Oops...',
         text: msg,
       });
+    },
+  },
+  watch: {
+    cart() {
+      // 購物車是否有資料， length>0:true, length=0:false
+      this.hasCartsItems = !!this.cart.carts.length;
     },
   },
   created() {
