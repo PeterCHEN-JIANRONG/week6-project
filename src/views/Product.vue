@@ -26,6 +26,9 @@
       <!-- col-sm-6 end -->
     </div>
   </div>
+
+  <!-- vue-loading -->
+  <VueLoading v-bind:active="isLoading"></VueLoading>
 </template>
 <script>
 export default {
@@ -36,10 +39,12 @@ export default {
         price: 0,
       },
       qty: 1,
+      isLoading: false,
     };
   },
   methods: {
     getProduct(id) {
+      this.isLoading = true;
       const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/product/${id}`;
       this.$http
         .get(url)
@@ -53,12 +58,14 @@ export default {
               text: res.data.message,
             });
           }
+          this.isLoading = false;
         })
         .catch((error) => {
           console.dir(error);
         });
     },
     addCart() {
+      this.isLoading = true;
       const data = {
         product_id: this.product.id,
         qty: this.qty,
@@ -68,16 +75,16 @@ export default {
         .post(url, { data })
         .then((res) => {
           if (res.data.success) {
-            // this.loadingStatus.loadingItem = '';
-            // this.qty = 1;
             this.$swal.fire({
-              position: 'top',
+              // position: 'top',
               icon: 'success',
               title: res.data.message,
               showConfirmButton: false,
               timer: 1500,
             });
-            this.$router.push('/products');
+            this.qty = 1;
+            this.isLoading = false;
+            // this.$router.push('/products');
           } else {
             this.$swal.fire({
               icon: 'error',

@@ -77,6 +77,85 @@
         </tr>
       </tfoot>
     </table>
+    <!-- 表單送出 -->
+    <div class="my-5 row justify-content-center">
+      <Form ref="form" class="col-md-6" v-slot="{ errors }" @submit="createOrder">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <Field
+            id="email"
+            name="email"
+            type="email"
+            placeholder="請輸入 Email"
+            class="form-control"
+            :class="{ 'is-invalid': errors['email'] }"
+            rules="email|required"
+            v-model="form.user.email"
+          ></Field>
+          <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
+        </div>
+
+        <div class="mb-3">
+          <label for="name" class="form-label">收件人姓名</label>
+          <Field
+            id="name"
+            name="姓名"
+            type="text"
+            placeholder="請輸入姓名"
+            class="form-control"
+            :class="{ 'is-invalid': errors['姓名'] }"
+            rules="required"
+            v-model="form.user.name"
+          ></Field>
+          <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
+        </div>
+
+        <div class="mb-3">
+          <label for="tel" class="form-label">收件人電話</label>
+          <Field
+            id="tel"
+            name="電話"
+            type="text"
+            placeholder="請輸入電話"
+            class="form-control"
+            :class="{ 'is-invalid': errors['電話'] }"
+            rules="required|min:8|max:10"
+            v-model="form.user.tel"
+          ></Field>
+          <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
+        </div>
+
+        <div class="mb-3">
+          <label for="address" class="form-label">收件人地址</label>
+          <Field
+            id="address"
+            name="地址"
+            type="text"
+            placeholder="請輸入地址"
+            class="form-control"
+            :class="{ 'is-invalid': errors['地址'] }"
+            rules="required"
+            v-model="form.user.address"
+          ></Field>
+          <ErrorMessage name="地址" class="invalid-feedback"></ErrorMessage>
+        </div>
+
+        <div class="mb-3">
+          <label for="message" class="form-label">留言</label>
+          <textarea
+            name=""
+            id="message"
+            class="form-control"
+            cols="30"
+            rows="10"
+            v-model="form.message"
+          ></textarea>
+        </div>
+        <div class="text-end">
+          <button type="submit" class="btn btn-danger" :disabled="!hasCartsItems">送出訂單</button>
+        </div>
+      </Form>
+    </div>
   </div>
 
   <!-- vue-loading -->
@@ -173,6 +252,27 @@ export default {
             this.getCart();
           }
           this.successAlert(res.data.message);
+          this.isLoading = false;
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
+    createOrder() {
+      this.isLoading = true;
+      const order = this.form;
+      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/order`;
+      this.$http
+        .post(url, { data: order })
+        .then((res) => {
+          if (res.data.success) {
+            this.getCart();
+            // 清空表單資料
+            this.$refs.form.resetForm();
+            this.successAlert(res.data.message);
+          } else {
+            this.errorAlert(res.data.message);
+          }
           this.isLoading = false;
         })
         .catch((error) => {
