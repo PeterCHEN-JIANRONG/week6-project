@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/week6-project/'
+  publicPath: '/week6-project/dist'
 }
