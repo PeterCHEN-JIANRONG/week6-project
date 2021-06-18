@@ -5,13 +5,16 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link active" to="/">Home</router-link>
+            <router-link class="nav-link active" to="/">首頁</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/products">Products</router-link>
+            <router-link class="nav-link" to="/products">產品列表</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/about">About</router-link>
+            <router-link class="nav-link" to="/about">關於我們</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/carts">購物車</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/admin">後台</router-link>
@@ -20,6 +23,5 @@
       </div>
     </div>
   </nav>
-  前台
   <router-view />
 </template>

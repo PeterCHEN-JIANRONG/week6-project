@@ -33,7 +33,7 @@
                 <button
                   type="button"
                   class="btn btn-outline-secondary"
-                  @click="openProductModal(item)"
+                  @click="pushProductPage(item)"
                 >
                   查看更多
                 </button>
@@ -177,6 +177,9 @@ export default {
         .catch((err) => {
           console.dir(err);
         });
+    },
+    pushProductPage(item) {
+      this.$router.push(`/product/${item.id}`);
     },
     openProductModal(item) {
       const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/product/${item.id}`;
