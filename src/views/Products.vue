@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <h1>產品列表</h1>
     <div class="mt-4">
       <!-- 產品列表 -->
       <table class="table align-middle">

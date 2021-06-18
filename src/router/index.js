@@ -6,6 +6,10 @@ const routes = [
     component: () => import('../views/Front.vue'),
     children: [
       {
+        path: 'index',
+        component: () => import('../views/Index.vue'),
+      },
+      {
         path: 'products',
         component: () => import('../views/Products.vue'),
       },
