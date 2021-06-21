@@ -33,12 +33,23 @@ const routes = [
     ],
   },
   {
+    path: '/login',
+    name: '後台登入',
+    component: () => import('../views/Login.vue'),
+  },
+  {
     path: '/admin',
     component: import('../views/Dashboard.vue'),
     children: [
       {
         path: 'products',
-        component: () => import('../views/admin/Products.vue'),
+        name: '產品管理頁',
+        component: () => import('../views/Dashboard/Products.vue'),
+      },
+      {
+        path: 'orders',
+        name: '訂單管理頁',
+        component: () => import('../views/Dashboard/Orders.vue'),
       },
     ],
   },
