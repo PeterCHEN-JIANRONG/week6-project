@@ -35,10 +35,16 @@
                   type="button"
                   class="btn btn-outline-secondary"
                   @click="pushProductPage(item)"
+                  :disabled="loadingStatus.loadingItem === item.id || !item.is_enabled"
                 >
                   查看更多
                 </button>
-                <button type="button" class="btn btn-outline-danger" @click="addCart(item.id)">
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  @click="addCart(item.id)"
+                  :disabled="loadingStatus.loadingItem === item.id || !item.is_enabled"
+                >
                   加到購物車
                 </button>
               </div>
@@ -64,6 +70,9 @@ export default {
       products: [],
       product: {},
       isLoading: false,
+      loadingStatus: {
+        loadingItem: '',
+      },
     };
   },
   components: {
@@ -108,6 +117,7 @@ export default {
     },
     addCart(id, qty = 1) {
       this.isLoading = true;
+      this.loadingStatus.loadingItem = id;
       const data = {
         product_id: id,
         qty,
@@ -119,6 +129,7 @@ export default {
           if (res.data.success) {
             // this.$refs.productModalA.hideModal();
             this.isLoading = false;
+            this.loadingStatus.loadingItem = '';
             this.successAlert(res.data.message);
           } else {
             this.errorAlert(res.data.message);
