@@ -28,7 +28,7 @@
   </div>
 
   <!-- vue-loading -->
-  <VueLoading v-bind:active="isLoading"></VueLoading>
+  <Loading :active="isLoading"></Loading>
 </template>
 <script>
 export default {

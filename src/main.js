@@ -3,8 +3,9 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueSweetalert2 from 'vue-sweetalert2';
 import '../node_modules/sweetalert2/dist/sweetalert2.min.css';
-import VueLoading from 'vue-loading-overlay';
-import '../node_modules/vue-loading-overlay/dist/vue-loading.css';
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
 // 匯入 vee-validate 主套件
 import {
   Field, Form, ErrorMessage, defineRule, configure,
@@ -43,6 +44,6 @@ app.use(router);
 app.component('Form', Form);
 app.component('Field', Field);
 app.component('ErrorMessage', ErrorMessage);
-app.component('VueLoading', VueLoading);
+app.component('Loading', Loading);
 
 app.mount('#app');

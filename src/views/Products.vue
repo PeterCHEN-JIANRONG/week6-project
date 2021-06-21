@@ -56,7 +56,7 @@
   </div>
 
   <!-- vue-loading -->
-  <VueLoading v-bind:active="isLoading"></VueLoading>
+  <Loading :active="isLoading"></Loading>
 
   <!-- modal -->
   <ProductModal ref="productModalA" :product="product" @add-to-cart="addCart"></ProductModal>
