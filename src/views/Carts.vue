@@ -34,10 +34,6 @@
                     @click="removeCartItem(item.id)"
                     :disabled="loadingStatus.loadingItem === item.id"
                   >
-                    <i
-                      class="fas fa-spinner fa-pulse"
-                      v-if="loadingStatus.loadingItem === item.id"
-                    ></i>
                     移除
                   </button>
                 </td>
@@ -90,7 +86,7 @@
     <div class="my-5 row justify-content-center">
       <Form ref="form" class="col-md-6" v-slot="{ errors }" @submit="createOrder">
         <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
+          <label for="email" class="form-label">Email*</label>
           <Field
             id="email"
             name="email"
@@ -105,7 +101,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="name" class="form-label">收件人姓名</label>
+          <label for="name" class="form-label">收件人姓名*</label>
           <Field
             id="name"
             name="姓名"
@@ -120,7 +116,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="tel" class="form-label">收件人電話</label>
+          <label for="tel" class="form-label">收件人電話*</label>
           <Field
             id="tel"
             name="電話"
@@ -135,7 +131,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="address" class="form-label">收件人地址</label>
+          <label for="address" class="form-label">收件人地址*</label>
           <Field
             id="address"
             name="地址"
