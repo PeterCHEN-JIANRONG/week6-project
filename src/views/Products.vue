@@ -62,7 +62,7 @@
   <ProductModal ref="productModalA" :product="product" @add-to-cart="addCart"></ProductModal>
 </template>
 <script>
-import ProductModal from '@/components/productModal.vue';
+import ProductModal from '@/components/ProductModal.vue';
 
 export default {
   data() {

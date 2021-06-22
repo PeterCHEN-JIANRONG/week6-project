@@ -28,14 +28,27 @@
         </tr>
       </tbody>
     </table>
+
+    <div class="d-flex justify-content-center">
+      <Pagination :pages="pagination" @get-products="getProducts"></Pagination>
+    </div>
   </div>
+  <!-- vue-loading -->
+  <Loading :active="isLoading"></Loading>
 </template>
 <script>
+import Pagination from '@/components/Pagination.vue';
+
 export default {
   data() {
     return {
       products: [],
+      pagination: {},
+      isLoading: false,
     };
+  },
+  components: {
+    Pagination,
   },
   methods: {
     getProducts(page = 1) {
@@ -46,6 +59,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.products = res.data.products;
+            this.pagination = res.data.pagination;
           } else {
             this.errorAlert(res.data.message);
           }
