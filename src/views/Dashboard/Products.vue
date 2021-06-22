@@ -28,6 +28,9 @@
         </tr>
       </tbody>
     </table>
+    <p class="text-end">
+      目前有 <span id="productCount">{{ products.length }}</span> 項產品
+    </p>
 
     <div class="d-flex justify-content-center">
       <Pagination :pages="pagination" @get-products="getProducts"></Pagination>
