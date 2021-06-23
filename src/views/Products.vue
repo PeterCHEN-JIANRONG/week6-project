@@ -81,7 +81,7 @@ export default {
   methods: {
     getProducts(page = 1) {
       this.isLoading = true;
-      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/products?page=${page}`;
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products?page=${page}`;
       this.$http
         .get(url)
         .then((res) => {
@@ -100,7 +100,7 @@ export default {
       this.$router.push(`/product/${item.id}`);
     },
     openProductModal(item) {
-      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/product/${item.id}`;
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${item.id}`;
       this.$http
         .get(url)
         .then((res) => {
@@ -122,7 +122,7 @@ export default {
         product_id: id,
         qty,
       };
-      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/cart`;
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       this.$http
         .post(url, { data })
         .then((res) => {

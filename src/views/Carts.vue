@@ -194,7 +194,7 @@ export default {
   methods: {
     getCart() {
       this.isLoading = true;
-      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/cart`;
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       this.$http
         .get(url)
         .then((res) => {
@@ -216,7 +216,7 @@ export default {
         product_id: item.product_id,
         qty: item.qty,
       };
-      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
       this.$http
         .put(url, { data })
         .then((res) => {
@@ -233,7 +233,7 @@ export default {
     },
     removeCartItem(id) {
       this.isLoading = true;
-      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/cart/${id}`;
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${id}`;
       this.$http
         .delete(url)
         .then((res) => {
@@ -249,7 +249,7 @@ export default {
     },
     deleteAllCarts() {
       this.isLoading = true;
-      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/carts`;
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/carts`;
       this.$http
         .delete(url)
         .then((res) => {
@@ -266,7 +266,7 @@ export default {
     createOrder() {
       this.isLoading = true;
       const order = this.form;
-      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/order`;
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order`;
       this.$http
         .post(url, { data: order })
         .then((res) => {

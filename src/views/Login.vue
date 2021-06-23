@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     signIn() {
-      const url = `${process.env.VUE_APP_DOMAIN}/admin/signin`;
+      const url = `${process.env.VUE_APP_API}/admin/signin`;
       this.$http.post(url, this.user).then((response) => {
         if (response.data.success) {
           const { token, expired } = response.data;

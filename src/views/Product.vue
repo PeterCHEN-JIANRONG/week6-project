@@ -45,7 +45,7 @@ export default {
   methods: {
     getProduct(id) {
       this.isLoading = true;
-      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/product/${id}`;
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${id}`;
       this.$http
         .get(url)
         .then((res) => {
@@ -70,7 +70,7 @@ export default {
         product_id: this.product.id,
         qty: this.qty,
       };
-      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/cart`;
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       this.$http
         .post(url, { data })
         .then((res) => {

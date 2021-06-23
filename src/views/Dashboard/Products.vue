@@ -56,7 +56,7 @@ export default {
   methods: {
     getProducts(page = 1) {
       this.isLoading = true;
-      const url = `${process.env.VUE_APP_DOMAIN}/api/${process.env.VUE_APP_PATH}/products?page=${page}`;
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products?page=${page}`;
       this.$http
         .get(url)
         .then((res) => {
